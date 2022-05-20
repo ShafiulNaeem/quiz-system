@@ -1,0 +1,90 @@
+.login_form_wrapper {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #172b4d;
+    &::before {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #0083cb;
+        clip-path: polygon(0 0, 100% 0%, 100% 22%, 0 50%);
+    }
+
+    form {
+        max-width: 470px;
+        width: 95%;
+        background-color: white;
+        border-radius: 7px;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        -ms-border-radius: 7px;
+        -o-border-radius: 7px;
+        margin-top: 10px;
+        filter: drop-shadow(0px 3px 17px rgba(44, 40, 40, 0.11));
+        padding: 45px 38px;
+        animation: animateForm 1.1s ease 1;
+        -webkit-animation: animateForm 1.1s ease 1;
+
+        @include max-media-width(575) {
+            padding: 45px 20px;
+        }
+    }
+    @keyframes animateForm {
+        from {
+            transform: translateY(35px);
+            -webkit-transform: translateY(35px);
+            -moz-transform: translateY(35px);
+            -ms-transform: translateY(35px);
+            -o-transform: translateY(35px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    .form_title {
+        h2 {
+            font-weight: bold;
+            font-size: 25px;
+            line-height: 29px;
+            color: #172b4d;
+            margin-bottom: 8px;
+        }
+    }
+
+    .sign_up {
+        text-align: center;
+        display: inline-block;
+        margin-top: 20px;
+        color: white;
+        margin-bottom: 20px;
+
+        a {
+            color: #11cdef;
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+}
+.sign_up_form_wrapper {
+    .input_row {
+        input,
+        .select2-container .select2-selection--single {
+            padding-left: 30px !important;
+        }
+    }
+}

@@ -1,0 +1,132 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@mixin on-event($self: false) {
+    @if $self {
+      &,
+      &:hover,
+      &:active,
+      &:focus {
+        @content;
+      }
+    } @else {
+      &:hover,
+      &:active,
+      &:focus {
+        @content;
+      }
+    }
+  }
+
+  @mixin when-inside($context) {
+    #{$context} & {
+      @content;
+    }
+  }
+
+
+  @mixin clearfix{
+    &::after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    display: inline-block;
+  }
+
+  /// Breakpoints map
+  /// @prop {String} keys - Keys are identifiers mapped to a given length
+  /// @prop {Map} values - Values are actual breakpoints expressed in pixels
+
+
+  //// Responsive device width
+  //$xl: 1399px;
+  //$lg: 1199px;
+  //$md: 991px;
+  //$sm: 767px;
+  //$xs: 575px;
+  //$xxs: 460px;
+  //$xxxs: 380px;
+  $breakpoints: (
+      'xl': 1399px,
+      'lg': 1199px,
+      'md': 991px,
+      'sm': 767px,
+      'xs': 575px,
+      'xxs': 460px,
+      'exs': 360px,
+  );
+
+
+  @mixin media($media){
+    @media all and (max-width: #{map-get($breakpoints,#{$media})}){
+      @content
+    }
+  }
+
+  @mixin media-width($media-width){
+    @media all and (max-width: #{$media-width}px){
+      transition: .5s; // animate when window resizing
+      @content
+    }
+  }
+  @mixin media-break-width($media-width-min, $media-width-max) {
+    @media (min-width: #{$media-width-min}px) and (max-width: #{$media-width-max}px) {
+      transition: 0.5s; // animate when window resizing
+      @content;
+    }
+  }
+  
+  @mixin min-media-width($media-width){
+    @media all and (min-width: #{$media-width}px){
+      transition: .5s; // animate when window resizing
+      @content
+    }
+  }
+  @mixin max-media-width($media-width){
+    @media all and (max-width: #{$media-width}px){
+      transition: .5s; // animate when window resizing
+      @content
+    }
+  }
+
+
+
+  @mixin  hover-transition() {
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+
+/* Custom scroll Bar */
+@mixin customScrollbar($bgColor:#172B4D,$barStrokeColor:#7764E4) {
+  overflow-y: scroll;
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background:  $bgColor;;
+    border-radius: 5px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $barStrokeColor;;
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #f84f4f;
+    cursor: grab;
+  }
+}

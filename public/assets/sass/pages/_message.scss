@@ -1,0 +1,68 @@
+.email_form {
+  padding: 0 40px 30px 40px;
+
+  label {
+    margin-bottom: 8px;
+    .label_name {
+      font-size: 15px;
+      margin-right: 10px;
+    }
+  }
+  .select2-container{
+      width: 100% !important;
+
+  }
+  .input_row {
+    margin-top: 28px !important;
+    input {
+      padding-left: 30px !important;
+    }
+
+    .select2-selection {
+      padding-left: 20px !important;
+    }
+    button[type="submit"]{
+        background: #7764e4 !important;
+        -webkit-filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+        filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+        color: white;
+        padding: 12px 30px;
+        border-radius: 7px;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+  }
+
+  input[type="checkbox"] {
+    width: auto !important;
+    height: auto !important;
+    opacity: 0 !important;
+  }
+
+
+}
+.message_details_list_area{
+  li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    @include max-media-width(575){
+      flex-direction: column;
+      align-items: start;
+    }
+    h3,h4{
+      font-size: 16px;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    h3,p{
+      width: 300px;
+      margin-top: 5px;
+      @include max-media-width(575){
+       width: 100%;
+      }
+
+    }
+  }
+}

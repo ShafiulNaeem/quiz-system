@@ -1,0 +1,211 @@
+.profile_detalis_item_area {
+  padding: 20px;
+  margin-top: 30px;
+  background-color: white;
+  h4 {
+    position: relative;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 21px;
+    color: #172b4d;
+  }
+  .profile_details_inner_header {
+    position: relative;
+    gap: 10px;
+    padding-bottom: 10px;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: -20px;
+      width: calc(100% + 40px);
+      height: 0.5px;
+      background-color: #d3d3d3;
+    }
+    ul {
+      gap: 10px;
+      a{
+        display: inline-block;
+margin-bottom: 1px;
+      }
+      button,a {
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 15px;
+        color: #ffffff;
+        background: #7764e4;
+        filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+        padding: 12px 20px;
+        border-radius: 7px;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+      #discardButton {
+        display: none;
+        background-color: #8898aa;
+      }
+    }
+  }
+  .profile_img_name_area {
+    gap: 10px 20px;
+    margin-top: 20px;
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 7px;
+      -webkit-border-radius: 7px;
+      -moz-border-radius: 7px;
+      -ms-border-radius: 7px;
+      -o-border-radius: 7px;
+    }
+    h3 {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 21px;
+      color: #172b4d;
+    }
+    ul {
+      margin-top: 10px;
+      padding-left: 11px;
+      gap: 10px 20px;
+      li {
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          left: -13px;
+          top: 6px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+          background-color: #2dce98;
+        }
+      }
+    }
+  }
+  .profile_form_area {
+    .input_row {
+      display: flex;
+      align-items: center;
+      gap: 10px 50px;
+      @include max-media-width(767) {
+        flex-direction: column;
+        align-items: start;
+      }
+      input
+       {
+        padding-left: 20px;
+      }
+      .select2-container .select2-selection--single{
+        padding-left: 12px;
+      }
+      .select2.select2-container {
+        width: 100% !important;
+      }
+      label,
+      p {
+        width: 200px;
+      }
+    }
+  }
+  .input_text_area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    h5 {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 21px;
+      color: #172b4d;
+    }
+    h4 {
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 21px;
+      color: #8898aa;
+      margin-top: 5px;
+    }
+    button {
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 15px;
+      color: #172b4d;
+      background: #d3d3d3;
+      -webkit-filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+      filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+      padding: 12px 20px;
+      border-radius: 7px;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+  .change_sign_form_area {
+    label {
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 21px;
+      margin-bottom: 5px;
+    }
+    input {
+      padding-left: 20px !important;
+    }
+  }
+  .update_button_area {
+    margin-top: 20px;
+    gap: 10px;
+    button {
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 15px;
+      color: #ffffff;
+      background: #7764e4;
+      -webkit-filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+      filter: drop-shadow(0px 3px 6px rgba(44, 40, 40, 0.11));
+      padding: 12px 20px;
+      border-radius: 7px;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+  .cancel_button {
+    background-color: #8898aa !important;
+  }
+  #showEmailSection,#resectPasswordRow{
+      display: none;
+  }
+  .change_sign_form_area{
+      position: relative;
+      padding-bottom: 10px;
+      margin-top: 20px;
+      &:not(:last-child) {
+        &::before {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: -20px;
+          width: calc(100% + 40px);
+          height: 0.5px;
+          background-color: #d3d3d3;
+        }
+      }
+  }
+
+  .change_active{
+      #changeEmailArea,#resetPassDemoText{
+          display: none;
+      }
+      #showEmailSection,#resectPasswordRow{
+          display: block;
+      }
+  }
+}
