@@ -55,6 +55,15 @@
 @toastr_js
 @toastr_render
 
+<script>
+    function editExamSelectBox(id){
+        $("#edit_time_specification" + id).select2({
+            placeholder: "Select Specification",
+            dropdownParent: $("#editFoodModal" + id),
+        });
+
+    }
+</script>
 @stack('script')
 
 </body>

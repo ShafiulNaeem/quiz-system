@@ -20,18 +20,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'skf_employee_id',
         'role_id',
-        'department_id',
-        'designation_id',
         'name',
         'email',
         'phone',
         'password',
-        'image',
         'status',
-        'is_management',
-        'created_by',
         'created_by',
         'created_at',
         'updated_at',
@@ -56,23 +50,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function department()
-    {
-        return $this->belongsTo('App\Models\Department');
-    }
-
-    public function designation()
-    {
-        return $this->belongsTo('App\Models\Designation');
-    }
-
     public function role()
     {
         return $this->belongsTo('App\Models\Role');
     }
 
-    public function orders()
+    public function answerSheets()
     {
-        return $this->hasMany('App\Models\Order','user_id');
+        return $this->hasMany('App\Models\AnswerSheet','user_id');
     }
 }
