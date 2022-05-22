@@ -21,8 +21,9 @@ Auth::routes();
 // route start
 Route::middleware('auth')->group(function (){
     Route::get('/','HomeController@index')->name('dashboard');
+    Route::get('/{title}/{id}','HomeController@question')->name('exam.question');
 
-    //Exams
+    //Exam
     Route::get('/exam','ExamController@index')->name('exam.index');
     Route::post('/exam','ExamController@store')->name('exam.store');
     Route::post('/exam/status','ExamController@update_status')->name('exam.status');
@@ -31,13 +32,8 @@ Route::middleware('auth')->group(function (){
 
     //question
     Route::resource('question','QuestionController');
-
-    //Message
-    Route::resource('message','MealMessageController');
-    Route::get('/message/email/{id}','MealMessageController@email')->name('message.email');
-    Route::post('/message/email/send','MealMessageController@send_email')->name('message.email.send');
-    Route::post('/message_delete','MealMessageController@message_delete')->name('message_delete');
-    Route::get('/export_message','MealMessageController@export_message')->name('export_message');
+    Route::post('/question/status','QuestionController@update_status')->name('question.status');
+    Route::post('/question_delete','QuestionController@question_delete')->name('question_delete');
 
 
 });

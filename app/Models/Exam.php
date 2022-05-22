@@ -24,4 +24,9 @@ class Exam extends Model
     {
         return $this->belongsTo('App\Models\User','created_by');
     }
+
+    public function questions()
+    {
+        return $this->hasMany('App\Models\Question','exam_id');
+    }
 }

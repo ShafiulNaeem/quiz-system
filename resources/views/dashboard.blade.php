@@ -7,53 +7,50 @@
                 class="dashboard_title d-flex align-items-center justify-content-between flex-wrap"
             >
                 <div class="topbar_title_icon_area d-flex align-items-center justify-content-between">
-                    <h3>Exam List</h3>
+                    <h3>Quiz</h3>
                     <svg width="36" height="27" viewBox="0 0 44 27" fill="none" xmlns="http://www.w3.org/2000/svg" id="mobileToggleIcon"><path d="M0 0.25H44V4.66667H0V0.25ZM11 11.2917H44V15.7083H11V11.2917ZM24.75 22.3333H44V26.75H24.75V22.3333Z" fill="white"></path></svg>
                 </div>
+                <div class="mobile_overlay_sidebar" id="mobileOverlay"></div>
 
                 @include('layouts.topbar')
-
             </div>
         </div>
 
         <div class="food_list_area">
-            <!-- data list section start -->
-            <div class="food_list_table table-responsive spece_small_table">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td>SI</td>
-                        <td>
-                            Name
-                            <img
-                                src="{{asset('assets/images/up_down_arrow.svg')}}"
-                                alt="arrow"
-                            />
-                        </td>
-                        <td>
-                            ACTION<img src="{{asset('assets/images/up_down_arrow.svg')}}" alt="arrow"/>
-                        </td>
-                    </tr>
-                    </thead>
+            <div class="profile_detalis_item_area">
+                <div class="profile_details_inner_header d-flex align-items-center justify-content-between flex-wrap">
+                    <h4>Quizzes</h4>
+                    <p>
+                        Select your subject.
+                    </p>
 
-                    <tbody>
-                    <tr>
+                </div>
+                <div class="message_details_list_area">
+                    <br>
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        @foreach($data['value'] as $key=>$value)
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{$value->title}}</h5>
+                                        <p class="card-text"> <strong>Exam Time: </strong> {{$value->exam_time.' '.$value->time_specification}}</p>
+                                        <p class="card-text"> <strong>Questions: </strong> {{$value->questions->count()}}</p>
+                                        <br>
+                                        <a @if($value->questions->count() != 0)
+                                           href="{{route('exam.question',[$value->title,$value->id])}}"
+                                           @endif
+                                           class="btn btn-success"
+                                        >Start Quiz</a>
 
-                        <td>1212</td>
-                        <td>PHP Quiz</td>
-                        <td>Acton</td>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
-                    </tr>
-
-                    </tbody>
-                </table>
-                <!--  staff pagination Start -->
-            {{--                {{ $data['value']->links('vendor.pagination.custom') }}--}}
-            <!--  staff pagination end -->
+                </div>
             </div>
-            <!-- data list section start -->
 
         </div>
     </section>
 @endsection
-

@@ -32,4 +32,9 @@ class Question extends Model
     {
         return $this->belongsTo('App\Models\Exam');
     }
+    public function questionBodies()
+    {
+        return $this->hasMany('App\Models\QuestionBody','question_id');
+    }
+
 }

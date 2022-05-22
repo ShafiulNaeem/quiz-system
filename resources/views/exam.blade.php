@@ -16,9 +16,7 @@
         </div>
 
         <div class="food_list_area">
-            <div
-                class="food_list_header d-flex align-items-center justify-content-between flex-wrap"
-            >
+            <div class="food_list_header d-flex align-items-center justify-content-between flex-wrap">
                 <!-- Add Exam area Start -->
                 <button type="button" data-bs-toggle="modal" data-bs-target="#addSKfModal">
                     <i class="fa-solid fa-plus"></i> <span>{{$data['add_title']}}</span>
