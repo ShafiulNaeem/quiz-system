@@ -24,11 +24,26 @@
                         Time: {{$data['exam']->exam_time}} <span>{{$data['exam']->time_specification}}</span>
                     </p>
 
+                    <div id="countdowntimer">
+                        <span id="demo"><span>
+                    </div>
+
+                    <ul class="d-flex align-items-center flex-wrap">
+                        <li>
+                            <a href="{{route('dashboard')}}"> Back To Quiz </a>
+                        </li>
+                    </ul>
+
                 </div>
                 <div class="message_details_list_area">
                     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
 
                         <div class="carousel-inner">
+
+                            <input type="text" hidden name="current_question_id" id="current_question_id" value="">
+                            <input type="text" hidden name="current_option_id" id="current_option_id" value="">
+                            <input type="text" hidden name="exam_id" id="exam_id" value="{{$data['exam']->id}}">
+                            <input type="text" hidden name="participation_number" id="participation_number" value="{{$data['participation_number']}}">
 
                             @foreach($data['question'] as $key => $question)
                                 <div class="carousel-item @if($key == 0) active @endif">
@@ -42,23 +57,34 @@
 
                                         <div class="input_row">
 
+                                            <input type="text" hidden name="type" id="type{{$question->id}}" value="{{$question->type}}">
+                                            <input type="text" hidden name="number_of_question" id="number_of_question{{$question->id}}" value="{{$key+1}}">
+                                            <input type="text" hidden name="total_question" id="total_question" value="{{$data['question']->count()}}">
+
+
                                             @if($question->type == 'Multiple Choice')
                                                 @foreach($question->questionBodies as $option)
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" onclick="nextButtonDisableFalse()" type="radio"
-                                                               name="ans"
-                                                               value="{{$option->input_name}}"
-                                                               id="flexRadioDefault{{$option->id}}" >
 
-                                                        <label class="form-check-label" for="flexRadioDefault{{$option->id}}">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" onclick="nextButtonDisableFalse({{$option}})"
+                                                               value="{{$option->input_name}}"
+                                                               type="radio"
+                                                               option_id="{{$option->id}}"
+                                                               name="ans"
+                                                               id="ans{{$option->id}}">
+                                                        <label class="form-check-label" for="flexRadioDefault1{{$option->id}}">
                                                             {{$option->input_name}}
                                                         </label>
                                                     </div>
+
                                                 @endforeach
                                             @else
                                                 @foreach($question->questionBodies as $option)
                                                     <label for=""><span class="label_name">Answer</span></label>
-                                                    <textarea type="text" onkeyup="nextDisableFalse()" id="text_ans" class="form-control" name="ans" rows="2"> </textarea>
+                                                    <textarea type="text" onkeyup="nextDisableFalse({{$option}})"
+                                                              id="ans{{$option->id}}"
+                                                              option_id="{{$option->id}}"
+                                                              class="form-control" name="ans" rows="2"> </textarea>
                                                 @endforeach
                                             @endif
 
@@ -84,27 +110,106 @@
         </div>
     </section>
 @endsection
-
+{{--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>--}}
 <script>
-    function nextDisableFalse(){
-        var text_ans = $('#text_ans').val();
+
+    // setInterval(function(){
+    //
+    //     var hr = 3;
+    //     var mm = 3;
+    //     var ss = 3;
+    //
+    //     if(hr == 0 && mm == 0 && ss == 0)clearInterval(interval);
+    //     ss--;
+    //     if(ss == 0)
+    //     {
+    //         ss = 59;
+    //         mm--;
+    //         if(mm == 0)
+    //         {
+    //             mm = 59;
+    //             hr--;
+    //         }
+    //     }
+    //
+    //     if(hr.toString().length < 2) hr = "0"+hr;
+    //     if(mm.toString().length < 2) mm = "0"+mm;
+    //     if(ss.toString().length < 2) ss = "0"+ss;
+    //     $("#demo").html(hr+" : "+mm+" : "+ss);
+    //
+    // },1000)
+
+    // setInterval(function() {
+    //     date = new Date()
+    //     let hour = 20;
+    //     console.log(hour);
+    //     let minutes = 1;
+    //     let seconds = date.getSeconds();
+    //     document.getElementById("demo").innerHTML = hour + ":"+ minutes + ":" + seconds;
+    // }, 1000);
+
+    function nextDisableFalse(option){
+        var text_ans = $('#ans'+option.id).val();
         text_ans = text_ans.trim();
         if (text_ans !=''){
             $('#next_question').attr("disabled",false);
+            $('#current_question_id').val(option.question_id);
+            $('#current_option_id').val(option.id);
         }else {
             $('#next_question').attr("disabled",true);
         }
-        console.log(email);
+
     }
 
-    function nextButtonDisableFalse(){
+    function nextButtonDisableFalse(option){
+        var fh = '<?php echo route('result',3) ?>'+'/'+3;
+        console.log(fh);
+
         $('#next_question').attr("disabled",false);
+        $('#current_question_id').val(option.question_id);
+        $('#current_option_id').val(option.id);
     }
 
     function nextQuestion(){
-        var email = $('#email1').val();
-        var next = $('#next_question');
-        console.log(email);
+
+        var question_id = $('#current_question_id').val();
+        var option_id = $('#current_option_id').val();
+        var exam_id = $('#exam_id').val();
+        var participation_number = $('#participation_number').val();
+        var ans = $('#ans'+option_id).val();
+        var number_of_question = $('#number_of_question'+question_id).val();
+        var total_question = $('#total_question').val();
+
+        $.ajax({
+            url: '{{ route('question.ans') }}',
+            method: "post",
+            data: {
+                _token: '{{ csrf_token() }}',
+                exam_id: exam_id,
+                question_id: question_id,
+                question_body_id: option_id,
+                participation_number: participation_number,
+                ans: ans,
+            },
+            success: function (response){
+                // console.error(response);
+                // toastr.success(response['message']);
+
+            },
+            error : function (error){
+                console.error(error);
+            }
+        });
+
+
+        if (number_of_question == total_question){
+            window.location.href = '<?php echo route('result',$data['participation_number']) ?>';
+        }
+
+        var break_point = total_question-1;
+        if (number_of_question == break_point){
+            $('#next_question').attr("data-bs-slide","1234");
+        }
 
         $('#next_question').attr("disabled",true);
     }

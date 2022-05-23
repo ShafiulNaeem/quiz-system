@@ -21,7 +21,9 @@ Auth::routes();
 // route start
 Route::middleware('auth')->group(function (){
     Route::get('/','HomeController@index')->name('dashboard');
-    Route::get('/{title}/{id}','HomeController@question')->name('exam.question');
+    Route::get('/quiz/{id}','HomeController@question')->name('exam.question');
+    Route::post('/question_ans','HomeController@question_ans')->name('question.ans');
+    Route::get('/quiz/result/{id}','HomeController@result')->name('result');
 
     //Exam
     Route::get('/exam','ExamController@index')->name('exam.index');

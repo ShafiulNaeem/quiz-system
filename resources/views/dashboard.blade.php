@@ -21,7 +21,7 @@
                 <div class="profile_details_inner_header d-flex align-items-center justify-content-between flex-wrap">
                     <h4>Quizzes</h4>
                     <p>
-                        Select your subject.
+                        Chose your subject.
                     </p>
 
                 </div>
@@ -37,7 +37,7 @@
                                         <p class="card-text"> <strong>Questions: </strong> {{$value->questions->count()}}</p>
                                         <br>
                                         <a @if($value->questions->count() != 0)
-                                           href="{{route('exam.question',[$value->title,$value->id])}}"
+                                           href="{{route('exam.question',$value->id)}}"
                                            @endif
                                            class="btn btn-success"
                                         >Start Quiz</a>
